@@ -7,9 +7,10 @@ services:
       - "traefik.frontend.rule=Host:whoami.docker.localhost"
   reverse-proxy:
     image: traefik
-    command: --api --docker #Enables the web UI and tells Træfik to listen to docker
+    command: -c traefik.toml --docker
     ports:
       - "8090:80"
-      - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/traefik.toml
+      - ./logs:/logs

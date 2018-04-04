@@ -2,8 +2,6 @@
 
 1.  Start the service
 
-Navigate to the [dashboard](http://localhost:8080/)
-
 ```
 docker-compose up -d
 ```
