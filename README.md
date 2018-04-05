@@ -3,7 +3,7 @@
 1.  Start the service
 
 ```
-docker-compose up -d
+docker-compose up --remove-orphans --force-recreate
 ```
 
 2.  Check the proxy is working

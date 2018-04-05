@@ -1,16 +1,25 @@
 version: '3'
 
 services:
-  whoami:
-    image: emilevauge/whoami #A container that exposes an API to show it's IP address
+  helloworld:
+    image: nginx:alpine
+    container_name: 'nginx'
     labels:
-      - "traefik.frontend.rule=Host:whoami.docker.localhost"
+      - traefik.backend=nginx
+      - traefik.port=8000
+      - traefik.frontend.rule=Host:localhost:8000
+      - traefik.frontend.entryPoints=http
+      - traefik.docker.network=proxy
+      # - traefik.frontend.redirect.replacement=http://localhost:80$$1
+
   reverse-proxy:
-    image: traefik
-    command: -c traefik.toml --docker
+    image: traefik:alpine
+    container_name: 'traefik'
+    command: --docker --web --api
     ports:
-      - "8090:80"
+      - "8000:80"
+      - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./traefik.toml:/traefik.toml
+      - ./traefik.toml:/etc/traefik/traefik.toml
       - ./logs:/logs
