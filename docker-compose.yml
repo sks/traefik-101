@@ -3,19 +3,18 @@ version: '3'
 services:
   helloworld:
     image: nginx:alpine
+    hostname: nginx
     container_name: 'nginx'
     labels:
-      - traefik.backend=nginx
-      - traefik.port=8000
-      - traefik.frontend.rule=Host:localhost:8000
-      - traefik.frontend.entryPoints=http
-      - traefik.docker.network=proxy
-      # - traefik.frontend.redirect.replacement=http://localhost:80$$1
+      - traefik.port=80
+      - traefik.frontend.rule=Host:127.0.0.1; Path:/ ,PathPrefix:/
+      - traefik.frontend.priority = 1
 
   reverse-proxy:
-    image: traefik:alpine
+    image: traefik
     container_name: 'traefik'
-    command: --docker --web --api
+    labels:
+      - traefik.enable=false
     ports:
       - "8000:80"
       - "8080:8080"

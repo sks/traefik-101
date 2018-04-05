@@ -46,7 +46,7 @@ logLevel = "DEBUG"
 # Optional
 #
 [traefikLog]
-filePath = "/logs/traefik.app.log"
+# filePath = "/logs/traefik.app.log"
 format = "json"
 
 ################################################################
@@ -54,7 +54,7 @@ format = "json"
 ################################################################
 
 [accessLog]
-filePath = "/logs/traefik.access.log"
+# filePath = "/logs/traefik.access.log"
 format = "json"
 
 ################################################################
@@ -62,7 +62,7 @@ format = "json"
 ################################################################
 
 # Enable API and dashboard
-# [api]
+[api]
 
   # Name of the related entry point
   #
@@ -76,7 +76,7 @@ format = "json"
   # Optional
   # Default: true
   #
-  # dashboard = false
+  dashboard = false
 
 ################################################################
 # Ping configuration
